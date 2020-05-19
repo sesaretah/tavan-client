@@ -86,7 +86,7 @@ export default class Layout extends Component {
         comments: task.the_comments
       });
     }
-    console.log(task)
+    this.$$('.btn').show();
   }
 
 
@@ -118,6 +118,8 @@ export default class Layout extends Component {
   }
 
   submit() {
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
     var data = { task_id: this.state.id, user_id: this.state.user_id }
     MyActions.setInstance('users/assignments', data, this.state.token);
   }

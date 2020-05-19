@@ -245,5 +245,10 @@ export const dict = {
   'confirmed':'تایید شده',
   'not_confirmed': 'تایید نشده',
   'blocked_list': 'کاربران مسدود شده',
-  'notifications': 'اطلاع رسانی'
+  'notifications': 'اطلاع رسانی',
+  'privacy':'حریم خصوصی',
+  'add_comments_to_reports':'افزودن نظر به گزارشات',
+  'new_notifications' : 'آگاهسازی های جدید',
+  'new_reports': 'آخرین گزارشات',
+  'events_calendar': 'تقویم رخدادها'
 }

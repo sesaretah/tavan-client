@@ -541,6 +541,15 @@ color: var(--f7-navbar-bg-color)
   overflow: scroll !important;
 }
 
+.of-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.of-scroll {
+  -ms-overflow-style: none;
+}
+
 .of-visible {
   overflow: visible !important;
 }
@@ -627,6 +636,11 @@ margin-left: 2px !important;
   padding-right: 10px;
 }
 
+.pd-0{
+  padding: 0px;
+}
+
+
 :root {
   --f7-tooltip-bg-color: rgba(0, 0, 0, 0.87);
   --f7-tooltip-text-color: #fff;
@@ -679,4 +693,27 @@ margin-left: 2px !important;
 .fs-10 .item-inner  .item-text .link{
   font-size: 1.2em !important;
   vertical-align: -2px;
+}
+.mh-90 {
+  max-height: 90px !important;
+  overflow: scroll;
+}
+
+.h-120 {
+  height: 120px !important;
+  overflow: scroll;
+}
+
+.h-200 {
+  height: 200px !important;
+  overflow: scroll;
+}
+
+
+.home .calendar {
+  height: 270px;
+}
+
+.home .calendar-day .calendar-day-events { 
+  margin-top: -2px;
 }

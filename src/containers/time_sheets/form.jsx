@@ -5,6 +5,8 @@ import crypto from 'crypto-js';
 
 
 const TimeSheetForm = (props) => {
+
+
   function association(type) {
     var chips = [
       <div>
@@ -19,7 +21,7 @@ const TimeSheetForm = (props) => {
     if (props.associations) {
       props.associations.map((association) => {
         if (association.kind == type) {
-          chips.push(<Chip text={association.title} deleteable onClick={() => props.removeAssociation(association.id, 'Morning')} />)
+          chips.push(<Chip text={association.title} deleteable onClick={() => props.removeAssociation(association.id, type)} />)
         }
       }
       )
@@ -105,6 +107,7 @@ const TimeSheetForm = (props) => {
           </List>
         </CardContent>
         <CardFooter>
+
           <Link></Link>
           <Button fill disabled={!props.editing} onClick={props.submit}>{dict.submit}</Button>
         </CardFooter>

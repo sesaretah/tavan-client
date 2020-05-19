@@ -1,4 +1,4 @@
-import HomePage from './containers/layouts/HomePage.jsx';
+import HomePage from './components/home/index.jsx';
 import NotFoundPage from './containers/layouts/NotFoundPage';
 import PanelRightPage from './containers/layouts/PanelRightPage';
 

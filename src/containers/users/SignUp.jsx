@@ -73,7 +73,8 @@ const SignUpForm = (props) => {
         </CardContent>
         <CardFooter>
           <Link href="/login/">{dict.if_registered}{'\u00A0'}{dict.you_can_login} </Link>
-          <Button className="col" fill onClick={props.submit}>{dict.sign_up}</Button>
+          <Link className="btn-notice"></Link>
+          <Button className="col btn" fill onClick={props.submit}>{dict.sign_up}</Button>
         </CardFooter>
       </Card>
     </Page>

@@ -221,6 +221,8 @@ export default class DocumentUpdate extends Component {
 
 
   submit() {
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
     var data = { id: this.state.id, title: this.state.title, details: this.state.details, start: this.state.start, start_time: this.state.startTime, deadline: this.state.deadline, deadline_time: this.state.deadlineTime }// start: new Date(this.state.start.setHours(startTime[0], startTime[1], 0, 0)).toISOString(), deadline:  new Date(this.state.deadline.setHours(deadlineTime[0], deadlineTime[1], 0, 0)).toISOString() }
     if (this.state.title && this.state.title.length > 0) {
       MyActions.updateInstance('tasks', data, this.state.token);
@@ -269,7 +271,7 @@ export default class DocumentUpdate extends Component {
 
 
   setInstance() {
-    const self = this;
+    this.$$('.btn').show();
     this.$f7router.navigate('/tasks/');
   }
 

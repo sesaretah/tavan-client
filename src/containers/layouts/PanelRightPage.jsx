@@ -73,6 +73,11 @@ export default class PanelRightPage extends Component {
         <React.Fragment>
           <BlockTitle> <i className="va ml-5 fa fa-tachometer"></i>{dict.dashboard}</BlockTitle>
           <List className='fs-13'>
+          <ListItem link="/" view="#main-view" panelClose>
+              <i className="va ml-5 fa fa-home"></i>
+              <span>{dict.home}</span>
+            </ListItem>
+
             <ListItem link="/tasks/" view="#main-view" panelClose>
               <i className="va ml-5 fa fa-tasks"></i>
               <span>{dict.tasks}</span>
@@ -90,11 +95,11 @@ export default class PanelRightPage extends Component {
             </ListItem>
           </List>
 
-          <BlockTitle>{dict.user_settings}</BlockTitle>
+          <BlockTitle><i className="va ml-5 fa fa-cogs"></i>{dict.user_settings}</BlockTitle>
           <List>
             <ListItem link="/settings/" ignoreCache={true} view="#main-view" panelClose>
-              <i className="va ml-5 fa fa-cog"></i>
-              <span>{dict.user_settings}</span>
+              <i className="va ml-5 fa fa-user-secret"></i>
+              <span>{dict.privacy}</span>
             </ListItem>
             <ListItem link="/profiles/" view="#main-view" panelClose>
               <i className="va ml-5 fa fa-user-circle-o"></i>
@@ -107,11 +112,9 @@ export default class PanelRightPage extends Component {
           </List>
 
 
-          <BlockTitle> <i className="va ml-5 fa fa-cogs"></i>{dict.settings}</BlockTitle>
+          <BlockTitle> <i className="va ml-5 fa fa-cog"></i>{dict.settings}</BlockTitle>
           <List className='fs-13'>
             {this.check_ability('change_role', "roles", "shield")}
-
-            {this.check_ability('change_metas', "metas", "th")}
 
             {this.check_ability('change_statuses', "statuses", "circle-o")}
 

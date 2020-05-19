@@ -61,10 +61,13 @@ export default class Layout extends Component {
         editable: tag.editable
       });
     }
+    this.$$('.btn').show();
   }
 
 
   submit() {
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
     var data = { tag_id: this.state.id, user_id: this.state.user_id }
     MyActions.setInstance('users/assignments', data, this.state.token);
   }

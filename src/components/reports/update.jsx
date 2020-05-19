@@ -33,6 +33,10 @@ export default class ReportUpdate extends Component {
     this.onEditorStateChange = this.onEditorStateChange.bind(this)
     this.getList = this.getList.bind(this)
     this.removeAttachment = this.removeAttachment.bind(this);
+    this.deleteInstance = this.deleteInstance.bind(this);
+    this.deleteReportConfirm = this.deleteReportConfirm.bind(this);
+    this.deleteReport = this.deleteReport.bind(this);
+    
     
 
     this.state = {
@@ -53,12 +57,14 @@ export default class ReportUpdate extends Component {
     ModelStore.on("got_instance", this.getInstance);
     ModelStore.on("set_instance", this.setInstance);
     ModelStore.on("got_list", this.getList);
+    ModelStore.on("deleted_instance", this.deleteInstance);
   }
 
   componentWillUnmount() {
     ModelStore.removeListener("got_instance", this.getInstance);
     ModelStore.removeListener("set_instance", this.setInstance);
     ModelStore.removeListener("got_list", this.getList);
+    ModelStore.removeListener("deleted_instance", this.deleteInstance);
   }
 
   submit(){
@@ -146,6 +152,30 @@ export default class ReportUpdate extends Component {
   }
 
 
+  deleteReportConfirm(){
+    const self = this;
+    const app = self.$f7;
+    app.dialog.confirm(dict.are_you_sure, dict.alert, self.deleteReport)
+  }
+
+  deleteReport(){
+    var data = { id: this.state.id}
+    MyActions.removeInstance('reports', data, this.state.token);
+  }
+
+  deleteInstance() {
+    if (this.state.task){
+      this.$f7router.navigate('/tasks/'+this.state.task.id);
+    }
+    if (this.state.work){
+      this.$f7router.navigate('/works/'+this.state.work.id);
+    }
+   
+  }
+
+
+
+
   render() {
     const { report, editorState, uuid, title, attachments} = this.state;
     return (
@@ -154,7 +184,7 @@ export default class ReportUpdate extends Component {
         <BlockTitle>{dict.workflow_form}</BlockTitle>
         <ReportForm 
         report={report} attachments={attachments} title={title} 
-        uuid={uuid} editorState={editorState} 
+        uuid={uuid} editorState={editorState} editing={true} deleteReportConfirm={this.deleteReportConfirm}
         onEditorStateChange={this.onEditorStateChange} submit={this.submit}  
         handleChange={this.handleChangeValue} removeAttachment={this.removeAttachment}/>
       </Page>

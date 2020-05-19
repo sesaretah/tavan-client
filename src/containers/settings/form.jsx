@@ -150,6 +150,18 @@ const SettingForm = (props) => {
                 <td></td>
               </tr>
               <tr>
+                <td className='fs-11'>{dict.add_comments_to_reports}</td>
+                <td><Toggle className='pd-5' checked={setting('add_comments_to_reports_email')} onChange={(e) => props.changeSetting(e, 'add_comments_to_reports_email')} /></td>
+                <td><Toggle className='pd-5' checked={setting('add_comments_to_reports_push')} onChange={(e) => props.changeSetting(e, 'add_comments_to_reports_push')} /></td>
+                <td><Toggle className='pd-5' checked={setting('add_comments_to_reports_sms')} onChange={(e) => props.changeSetting(e, 'add_comments_to_reports_sms')} /></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
                 <td className='fs-11'>{dict.add_involvement_to_todos}</td>
                 <td><Toggle className='pd-5' checked={setting('add_involvement_to_todos_email')} onChange={(e) => props.changeSetting(e, 'add_involvement_to_todos_email')} /></td>
                 <td><Toggle className='pd-5' checked={setting('add_involvement_to_todos_push')} onChange={(e) => props.changeSetting(e, 'add_involvement_to_todos_push')} /></td>

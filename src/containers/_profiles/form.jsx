@@ -35,7 +35,8 @@ const ProfileForm = (props) => {
           </List>
           <CardFooter>
             <Link></Link>
-            <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
+            <Link className="btn-notice"></Link>
+            <Button className="col btn" fill onClick={props.submit}>{dict.submit}</Button>
           </CardFooter>
         </Card>
         <Card>

@@ -39,8 +39,8 @@ const LoginForm = (props) => {
         <CardFooter>
           <Link href="/sign_up/" animate={false} ignoreCache={true}>{dict.you_can_sign_up} </Link>
           <Button fill className='fs-11 external f-color-black bg-teal' href="https://auth.ut.ac.ir:8443/cas/login?service=https%3A%2F%2Ftavan.ut.ac.ir%2Fusers%2Fservice"  animate={false} ignoreCache={true}>{dict.cas} </Button>
-          
-          <Button className="col" fill onClick={props.submit}>{dict.login}</Button>
+          <Link className="btn-notice"></Link>
+          <Button className="col btn" fill onClick={props.submit}>{dict.login}</Button>
         </CardFooter>
       </Card>
     </Page>

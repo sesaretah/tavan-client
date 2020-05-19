@@ -20,7 +20,9 @@ export default class Layout extends Component {
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.getList = this.getList.bind(this);
     this.submitComment = this.submitComment.bind(this);
-    this.removeComment = this.removeComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
+    this.deleteCommentConfirm = this.deleteCommentConfirm.bind(this);
+    
     this.loadMore = this.loadMore.bind(this);
 
 
@@ -34,6 +36,7 @@ export default class Layout extends Component {
       sheetOpened: false,
       commentContent: '',
       comments: null,
+      access: null,
       token: window.localStorage.getItem('token'),
 
     }
@@ -65,7 +68,8 @@ export default class Layout extends Component {
       this.setState({
         report: report,
         id: report.id,
-        comments: report.comments
+        comments: report.the_comments,
+        access: report.user_access,
       });
     }
     console.log(report)
@@ -81,7 +85,7 @@ export default class Layout extends Component {
     if (report && klass === 'Report') {
       this.setState({
         report: report,
-        comments: report.comments,
+        comments: report.the_comments,
         page: 1
       });
     }
@@ -111,17 +115,24 @@ export default class Layout extends Component {
 
 
   submitComment() {
-    var data = { report_id: this.state.id, content: this.state.commentContent }
+    var data = { commentable_type: 'Report', commentable_id: this.state.id, content: this.state.commentContent }
     MyActions.setInstance('comments', data, this.state.token);
   }
 
-  removeComment(id) {
+
+  deleteCommentConfirm(id) {
+    const self = this;
+    const app = self.$f7;
+    app.dialog.confirm(dict.are_you_sure, dict.alert, () => self.deleteComment(id))
+  }
+
+  deleteComment(id) {
     var data = { id: id }
     MyActions.removeInstance('comments', data, this.state.token, this.state.page);
   }
 
   render() {
-    const { report, comments } = this.state;
+    const { report, comments , access} = this.state;
     return (
       <Page>
         <Navbar title={dict.reports} >
@@ -131,7 +142,12 @@ export default class Layout extends Component {
       </Navbar>
         <BlockTitle></BlockTitle>
         {this.fab()}
-        <ReportShow report={report} comments={comments} submitComment={this.submitComment} removeComment={this.removeComment} submit={this.submit} interaction={this.interaction} handleChange={this.handleChangeValue} loadMore={this.loadMore} />
+        <ReportShow 
+          report={report} comments={comments} submitComment={this.submitComment}
+          deleteCommentConfirm={this.deleteCommentConfirm} submit={this.submit} 
+          handleChange={this.handleChangeValue} loadMore={this.loadMore} 
+          access={access}
+          />
       </Page>
     );
   }

@@ -21,6 +21,7 @@ const InvolvementList = (props) => {
         return (
           <select name="role" onChange={(e) => { props.changeRole(involvement.profile.id, e.target.value) }}>
             {option('Admin', involvement)}
+            {option('Confirmer', involvement)}
             {option('Colleague', involvement)}
             {option('Observer', involvement)}
           </select>

@@ -27,7 +27,7 @@ const TodoList = (props) => {
                     <List>
                         <TodosInvolvementsList 
                         todos={props.todos} todoChecked={props.todoChecked} 
-                        deleteTodoConfirm={props.deleteTodoConfirm}
+                        deleteTodoConfirm={props.deleteTodoConfirm} editable={props.editable}
                         />
                     </List>
                 </CardContent>

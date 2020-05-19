@@ -191,6 +191,8 @@ export default class TaskCreate extends Component {
   }
 
   submit() {
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
     var data = { 
        title: this.state.title, details: this.state.details,
        start: this.state.start, start_time: this.state.startTime, 
@@ -212,7 +214,7 @@ export default class TaskCreate extends Component {
   }
 
   setInstance() {
-    const self = this;
+    this.$$('.btn').show();
     this.$f7router.navigate('/tasks/');
   }
 

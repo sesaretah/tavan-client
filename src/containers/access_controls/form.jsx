@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Icon, ListInput, Block, Row, Button, BlockTitle } from 'framework7-react';
+import { List, Link, ListInput, Block, Row, Button, BlockTitle } from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 import UserOptions from "../users/options";
@@ -32,7 +32,8 @@ const AccessControlForm = (props) => {
             </List>
             <Block strong inset>
                 <Row tag="p">
-                    <Button className="col" fill onClick={props.addAbility}>{dict.submit}</Button>
+                 <Link className="btn-notice"></Link>
+                    <Button className="col btn" fill onClick={props.addAbility}>{dict.submit}</Button>
                 </Row>
             </Block>
         </React.Fragment>

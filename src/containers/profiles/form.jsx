@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, ListInput, CardFooter, Button, Card, Link, CardHeader, CardContent, Row } from 'framework7-react';
+import { List, ListInput, CardFooter, Button, Card, Link, CardHeader, CardContent, Row } from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 import ExpertiesList from "./experties";
@@ -35,7 +35,8 @@ const ProfileForm = (props) => {
           </CardContent>
           <CardFooter>
             <Link></Link>
-            <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
+            <Link className="btn-notice"></Link>
+            <Button className="col btn" fill onClick={props.submit}>{dict.submit}</Button>
           </CardFooter>
         </Card>
 

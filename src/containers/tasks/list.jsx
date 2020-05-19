@@ -64,7 +64,7 @@ const TaskList = (props) => {
 
           {sort()}
         </CardHeader>
-        <CardContent>
+        <CardContent className='h-200'>
           <List mediaList className='fs-11'>
             {props.tasks.map((task) =>
               <ListItem key={'task' + task.id} title={task.title} text={task.details} after={alerts(task)} link={'/tasks/' + task.id}></ListItem>

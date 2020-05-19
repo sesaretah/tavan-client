@@ -67,6 +67,7 @@ export default class Layout extends Component {
         comments: time_sheet.the_comments,
       });
     }
+    this.$$('.btn').show();
   }
 
   getList() {
@@ -80,6 +81,8 @@ export default class Layout extends Component {
   }
 
   submit() {
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
     var data = { time_sheet_id: this.state.id, user_id: this.state.user_id }
     MyActions.setInstance('users/assignments', data, this.state.token);
   }

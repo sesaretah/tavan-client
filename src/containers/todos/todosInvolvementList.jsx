@@ -12,10 +12,13 @@ const TodosInvolvementsList = (props) => {
   function addInvolvements(todo) {
     var chips = []
     todo.involvements.map((involvement) =>
-      chips.push(<Chip key={'chip' +'-'+todo.id +'-'+ involvement.profile.id} className="ml-5" text={involvement.profile.fullname} />)
+      chips.push(<Chip key={'chip' + '-' + todo.id + '-' + involvement.profile.id} className="ml-5" text={involvement.profile.fullname} />)
     )
-    chips.push(<Link key={'todoEdit'+ todo.id} href={'/todos/' + todo.id + '/edit'}><i className="ml-5 fa fa-edit"></i></Link>)
-    chips.push(<Link key={'todoDelete'+ todo.id} onClick={() => props.deleteTodoConfirm(todo.id)}><i className="ml-5 fa fa-trash"></i></Link>)
+    if (props.editable) {
+      chips.push(<Link key={'todoEdit' + todo.id} href={'/todos/' + todo.id + '/edit'}><i className="ml-5 fa fa-edit"></i></Link>)
+      chips.push(<Link key={'todoDelete' + todo.id} onClick={() => props.deleteTodoConfirm(todo.id)}><i className="ml-5 fa fa-trash"></i></Link>)
+    }
+
     return (chips)
 
   }
@@ -33,7 +36,7 @@ const TodosInvolvementsList = (props) => {
 
           <li className={lt(todo)} key={'todo' + todo.id}>
             <label className="item-content item-checkbox">
-              <input type="checkbox" value="" checked={todo.check} onChange={(e) => props.todoChecked(todo.id,e)}></input>
+              <input type="checkbox" value="" checked={todo.check} onChange={(e) => props.todoChecked(todo.id, e)}></input>
               <i className="icon icon-checkbox"></i>
               <div className="item-inner of-scroll">
                 <div className="item-title of-visible mw-auto">{todo.title}</div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Col, ListInput, Block, Row, Button, BlockTitle, Card, Icon } from 'framework7-react';
+import { List, Col, ListInput, Block, Row, Button, BlockTitle, Card, Link } from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 
@@ -15,7 +15,7 @@ const WorkForm = (props) => {
     if (props.editing) {
       return (
         <Col>
-          <Button className="col ml-5" outline color='red' disabled={!props.editing} onClick={() => props.deleteWorkConfirm()}>{dict.delete}</Button>
+          <Button className="col btn ml-5" outline color='red' disabled={!props.editing} onClick={() => props.deleteWorkConfirm()}>{dict.delete}</Button>
         </Col>
       )
     }
@@ -111,7 +111,8 @@ const WorkForm = (props) => {
       <Block strong>
         <Row tag="p">
           {deleteButton()}
-          <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
+          <Link className="btn-notice"></Link>
+          <Button className="col btn" fill onClick={props.submit}>{dict.submit}</Button>
         </Row>
       </Block>
     </Card >

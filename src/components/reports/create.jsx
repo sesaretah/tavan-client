@@ -59,6 +59,10 @@ export default class ReportCreate extends Component {
 
 
   submit() {
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
+    
+  //  this.$$()
     const blocks = convertToRaw(this.state.editorState.getCurrentContent()).blocks;
     const value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
     var taskId = null
@@ -92,7 +96,6 @@ export default class ReportCreate extends Component {
 
   componentDidMount() {
     this.loadData();
-    console.log(this.state.uuid)
   }
 
   loadData() {
@@ -110,6 +113,7 @@ export default class ReportCreate extends Component {
     var report = ModelStore.getIntance()
     var klass = ModelStore.getKlass()
     if (report && klass === 'Report') { 
+      this.$$('.btn').show();
       this.$f7router.navigate('/reports/'+ report.id);
     }
     

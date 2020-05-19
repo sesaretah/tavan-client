@@ -5,29 +5,48 @@ import { EditorState, convertFromRaw } from "draft-js";
 import { Editor } from 'react-draft-wysiwyg';
 import { dict } from '../../Dict';
 import Moment from 'react-moment';
-import JDate from 'jalali-date';
+import CommentForm from "../comments/form"
+import CommentList from "../comments/list"
 import 'moment-timezone';
 import 'moment/locale/fa';
 
-
-
 const ReportShow = (props) => {
-  console.log(props)
+
+  function commentable(){
+    if (props.access.includes('view_reports')) {
+      return (
+        <CommentForm
+          model={props.task} submit={props.submitComment}
+          handleChange={props.handleChange} 
+    
+         
+        />
+      )
+    }
+  }
+
+  function comments(){
+    if (props.comments) {
+     return( <CommentList
+      comments={props.comments} deleteCommentConfirm={props.deleteCommentConfirm}
+      loadMore={props.loadMore} />)
+    }
+  }
   if (props.report && props.report.draft) {
     const contentState = convertFromRaw(props.report.draft);
     const editorState = EditorState.createWithContent(contentState);
-    function parent(){
-      if(props.report.the_work){
-        return( <ListItem title={props.report.the_work.title} href={'/works/'+props.report.the_work.id}></ListItem>)
+    function parent() {
+      if (props.report.the_work) {
+        return (<ListItem title={props.report.the_work.title} href={'/works/' + props.report.the_work.id}></ListItem>)
       }
-      if(props.report.the_task){
-        return( <ListItem title={props.report.the_task.title} href={'/tasks/'+props.report.the_task.id}></ListItem>)
+      if (props.report.the_task) {
+        return (<ListItem title={props.report.the_task.title} href={'/tasks/' + props.report.the_task.id}></ListItem>)
       }
     }
 
     function creation(t) {
       var date = new Date(new window.ODate(t))
-      return(<Moment date={date} fromNow></Moment>)
+      return (<Moment date={date} fromNow></Moment>)
     }
     return (
       <React.Fragment>
@@ -41,7 +60,7 @@ const ReportShow = (props) => {
         </List>
 
         <List simple-list>
-        <ListItem
+          <ListItem
             key={'profile' + props.report.profile.id}
             title={props.report.profile.fullname}
             after=''>
@@ -63,7 +82,7 @@ const ReportShow = (props) => {
           readOnly={true}
         />
         <List simple-list>
-        <ListItem title={creation(props.report.creation_date)}></ListItem>
+          <ListItem title={creation(props.report.creation_date)}></ListItem>
         </List>
 
         <BlockTitle>{dict.attachments}</BlockTitle>
@@ -73,7 +92,7 @@ const ReportShow = (props) => {
               <div className="item-content">
                 <div className="item-inner">
                   <div className="item-title">
-                    <a className="link external" target="_blank"  href={attachment.link}>
+                    <a className="link external" target="_blank" href={attachment.link}>
                       <i className="fa ml-5 fa-cloud-download" aria-hidden="true"></i>
                       {attachment.filename}
                     </a>
@@ -83,6 +102,11 @@ const ReportShow = (props) => {
             </li>
           )}
         </List>
+
+        {commentable()}
+        {comments()}
+
+
       </React.Fragment>
     )
   } else {

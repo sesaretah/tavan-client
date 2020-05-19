@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, ListInput, Block, Row, Button, BlockTitle, Chip } from 'framework7-react';
+import { List, ListItem, ListInput, Block, Row, Button, BlockTitle, Chip, Link } from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 
@@ -44,7 +44,8 @@ const GroupForm = (props) => {
 
       <Block strong>
         <Row tag="p">
-          <Button className="col" fill disabled={!props.editing} onClick={props.submit}>{dict.submit}</Button>
+        <Link className="btn-notice"></Link>
+          <Button className="col btn" fill disabled={!props.editing} onClick={props.submit}>{dict.submit}</Button>
         </Row>
       </Block>
     </React.Fragment>

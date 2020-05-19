@@ -44,7 +44,8 @@ export default class extends React.Component {
   }
 
   submit() {
-
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
     var data = { 
       email: this.state.email,
        name: this.state.name, 
@@ -64,6 +65,7 @@ export default class extends React.Component {
   setInstance() {
     var klass = ModelStore.getKlass()
     if (klass === 'SignUp') {
+      this.$$('.btn').show();
       this.$f7router.navigate('/verification/'+this.state.email);
     }
   }

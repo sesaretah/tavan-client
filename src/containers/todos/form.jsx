@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, ListInput, Block, Row, Button, Chip, Col } from 'framework7-react';
+import { List, ListItem, ListInput, Block, Row, Button, Link, Col } from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 
@@ -49,7 +49,8 @@ const TodoForm = (props) => {
         <Block strong>
           <Row tag="p">
             <Col>
-              <Button className="col" fill disabled={!props.editing} onClick={props.submit}>{dict.submit}</Button>
+            <Link className="btn-notice"></Link>
+              <Button className="col btn" fill disabled={!props.editing} onClick={props.submit}>{dict.submit}</Button>
             </Col>
           </Row>
         </Block>

@@ -127,6 +127,8 @@ export default class DocumentUpdate extends Component {
 
 
   submit() {
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
     var data = {
       id: this.state.id, title: this.state.title, public: this.state.isPublic,
       details: this.state.details, tags: this.state.tags, archive_note: this.state.archiveNote,
@@ -207,6 +209,7 @@ export default class DocumentUpdate extends Component {
     var task = ModelStore.getIntance()
     var klass = ModelStore.getKlass()
     if (task && klass === 'Task') {
+      this.$$('.btn').show();
       this.$f7router.navigate('/tasks/' + task.id);
     }
   }

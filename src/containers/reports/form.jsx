@@ -1,5 +1,5 @@
 import React from "react";
-import { List, BlockTitle, ListInput, Link, CardFooter, Button, Card, CardHeader } from 'framework7-react';
+import { List, BlockTitle, ListInput, Link, CardFooter, Button, Card, CardHeader, Col } from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 import { Editor } from 'react-draft-wysiwyg';
@@ -8,6 +8,17 @@ import UploadForm from "../uploads/form"
 import fa from '../../js/fa.js';
 
 const ReportForm = (props) => {
+
+  function deleteButton() {
+    if (props.editing) {
+      return (
+        <Col>
+          <Button className="col btn ml-5" outline color='red' disabled={!props.editing} onClick={() => props.deleteReportConfirm()}>{dict.delete}</Button>
+        </Col>
+      )
+    }
+  }
+
   function attachments() {
     if (props.previous_attachments) {
       return (
@@ -69,8 +80,10 @@ const ReportForm = (props) => {
           </List>
 
           <CardFooter>
+          {deleteButton()}
             <Link></Link>
-            <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
+            <Link className="btn-notice"></Link>
+            <Button className="col btn" fill onClick={(e) => props.submit(e)} >{dict.submit}</Button>
           </CardFooter>
         </Card>
         <UploadForm uploadableType='Report' uuid={props.uuid} />

@@ -45,6 +45,8 @@ export default class TodoCreate extends Component {
 
 
   submit() {
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
     var data = { 
         title: this.state.title, work_id: this.$f7route.params['workId'],
         involvements: this.state.involvements
@@ -68,6 +70,7 @@ export default class TodoCreate extends Component {
     var todo = ModelStore.getIntance()
     var klass = ModelStore.getKlass()
     if (todo && klass === 'Todo') {
+      this.$$('.btn').show();
       this.$f7router.navigate('/works/'+todo.work_id);
     } 
   }

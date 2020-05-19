@@ -50,7 +50,7 @@ const Partcipants = (props) => {
                 <CardHeader>
                     {dict.coworkers}
                 </CardHeader>
-                <CardContent>
+                <CardContent className='mh-90'>
                     <List>
                         <InvolvementList
                             involvements={props.task.the_involvements} removeProfile={props.removeProfile}

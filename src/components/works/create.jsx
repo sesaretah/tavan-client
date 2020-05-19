@@ -134,6 +134,8 @@ export default class WorkCreate extends Component {
   }
 
   submit() {
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
     var data = { 
       title: this.state.title, details: this.state.details, 
       start: this.state.start, start_time: this.state.startTime, 
@@ -158,8 +160,10 @@ export default class WorkCreate extends Component {
     var work = ModelStore.getIntance()
     var klass = ModelStore.getKlass()
     if (work && klass === 'Work') {
+      this.$$('.btn').show();
       this.$f7router.navigate('/works/'+work.id);
     } else {
+      this.$$('.btn').show();
       this.$f7router.navigate('/tasks/');
     }
     
@@ -173,7 +177,7 @@ export default class WorkCreate extends Component {
       <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
         <Navbar title={dict.work_form} backLink={dict.back} />
         <BlockTitle>{dict.work_form}</BlockTitle>
-        <WorkForm work={work} submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
+        <WorkForm work={work} submit={this.submit} editing={false} handleChange={this.handleChangeValue} />
       </Page>
     );
   }

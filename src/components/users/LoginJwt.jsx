@@ -49,7 +49,7 @@ export default class extends React.Component {
     var klass = ModelStore.getKlass()
     if (klass === 'Validate') {
       window.localStorage.setItem('token', user.token);
-      this.$f7router.navigate('/tasks/');
+      this.$f7router.navigate('/');
       window.location.reload()
     } else {
       this.$f7router.navigate('/login_error/');

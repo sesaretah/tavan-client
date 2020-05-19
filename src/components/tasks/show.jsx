@@ -85,6 +85,7 @@ export default class Layout extends Component {
         access: task.user_access
       });
     }
+    this.$$('.btn').show();
   }
 
 
@@ -115,6 +116,8 @@ export default class Layout extends Component {
   }
 
   submit() {
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
     var data = { task_id: this.state.id, user_id: this.state.user_id }
     MyActions.setInstance('users/assignments', data, this.state.token);
   }

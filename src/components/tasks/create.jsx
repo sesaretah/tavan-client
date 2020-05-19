@@ -105,6 +105,8 @@ export default class TaskCreate extends Component {
   }
 
   submit() {
+    this.$$('.btn').hide();
+    this.$$('.btn-notice').text(dict.submitting);
     var data = {
       title: this.state.title, public: this.state.isPublic,
       details: this.state.details, tags: this.state.tags
@@ -132,7 +134,7 @@ export default class TaskCreate extends Component {
   }
 
   setInstance() {
-    const self = this;
+    this.$$('.btn').show();
     this.$f7router.navigate('/tasks/');
   }
 

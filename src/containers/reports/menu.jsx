@@ -1,5 +1,5 @@
 import React from "react";
-import { Actions, ActionsLabel, ActionsGroup, ActionsButton, Icon, Button} from 'framework7-react';
+import { Actions, ActionsLabel, ActionsGroup, ActionsButton, Link, Button} from 'framework7-react';
 import { dict} from '../../Dict';
 
 
@@ -20,7 +20,8 @@ const ReportMenu = (props) => {
           <ActionsButton color="red">{dict.cancel}</ActionsButton>
         </ActionsGroup>
       </Actions>
-      <Button className="col" fill href={false} actionsOpen={"#actions-two-groups-"+props.report.id}><i class="va fas fa-users"></i></Button>
+      <Link className="btn-notice"></Link>
+      <Button className="col btn" fill href={false} actionsOpen={"#actions-two-groups-"+props.report.id}><i class="va fas fa-users"></i></Button>
       </React.Fragment>
     )
   } else {
