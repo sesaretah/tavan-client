@@ -14,21 +14,29 @@ const NotificationList = (props) => {
         return 'bg-blonde'
       }
     }
+
+    function item(notification) {
+      if(notification && notification.notification_text) {
+      return (
+        <ListItem
+          className={'fs-11 ' + colorClass(notification)}
+          key={crypto.lib.WordArray.random(32)}
+          link={'/' + notification.target_type + '/' + notification.target_id}
+          title={profileLink(notification.profile)}
+          text={notification.notification_text.title}
+        >
+          <img slot="media" src={notification.profile.avatar} width="32" height="32" />
+        </ListItem>
+      )
+      }
+    }
     return (
       <Card>
         <CardHeader>{dict.new_notifications}</CardHeader>
         <CardContent className='h-120'>
           <List mediaList>
             {props.notifications.map((notification) =>
-              <ListItem
-                className={'fs-11 ' + colorClass(notification)}
-                key={crypto.lib.WordArray.random(32)}
-                link={'/' + notification.target_type + '/' + notification.target_id}
-                title={profileLink(notification.profile)}
-                text={notification.notification_text.title}
-              >
-                <img slot="media" src={notification.profile.avatar} width="32" height="32" />
-              </ListItem>
+              item(notification)
             )}
           </List>
         </CardContent>

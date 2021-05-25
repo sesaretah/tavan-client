@@ -54,6 +54,8 @@ import GroupIndex from './components/groups/index';
 import GroupCreate from './components/groups/create';
 import GroupUpdate from './components/groups/update';
 
+import SurveillanceIndex from './components/surveillances/index';
+
 import SettingUpdate from './components/settings/update';
 
 import Login from './components/users/Login';
@@ -267,6 +269,12 @@ export default [
     path: '/profiles/:profileId',
     component: ProfileShow,
   },
+
+  {
+    path: '/surveillances/',
+    component: SurveillanceIndex,
+  },
+
   {
     path: '(.*)',
     component: NotFoundPage,

@@ -13,7 +13,6 @@ import CommentList from "../comments/list"
 import TodoList from "../todos/list"
 
 const WorkShow = (props) => {
-console.log(props.work)
   function archived(){
     if(props.work.archived){
       return(
@@ -82,12 +81,17 @@ console.log(props.work)
       if (props.access.includes('reports')) {
         editable = true
       }
-      return (<Reports work={props.work} editable={editable} ></Reports>)
+      return (<Reports work={props.work} editable={editable} reports={props.reports} searchReport={props.searchReport} ></Reports>)
     }
 
     if (segment === 'comments') {
       if (props.access.includes('comments')) {
-        return (<CommentForm model={props.work} submit={props.submitComment} handleChange={props.handleChange} />)
+        return (<CommentForm 
+          model={props.work} submit={props.submitComment} 
+          handleChange={props.handleChange} replyTo={props.replyTo}
+          comments={props.comments} removeReply={props.removeReply}
+          rnd={props.rnd}
+          />)
       }
     }
 
@@ -145,7 +149,10 @@ console.log(props.work)
             </Row>
             {access('comments')}
 
-            <CommentList comments={props.comments} deleteCommentConfirm={props.deleteCommentConfirm}  />
+            <CommentList 
+              comments={props.comments} deleteCommentConfirm={props.deleteCommentConfirm}  
+              replyToComment={props.replyToComment} 
+            />
 
           </React.Fragment>
         )

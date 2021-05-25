@@ -1,6 +1,6 @@
 
 export function loggedIn() {
-  console.log('>>>>>>>>>>>>>>>>>>>>>');
+ // console.log('>>>>>>>>>>>>>>>>>>>>>');
     var token = window.localStorage.getItem('token');
     if (token) {
       return true

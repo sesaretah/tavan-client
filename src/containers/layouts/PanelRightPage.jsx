@@ -89,6 +89,12 @@ export default class PanelRightPage extends Component {
             </ListItem>
 
 
+            <ListItem link="/surveillances/" view="#main-view" panelClose>
+              <i className="va ml-5 fa fa-eye"></i>
+              <span>{dict.surveillance}</span>
+            </ListItem>
+
+
             <ListItem link="/notifications/" ignoreCache={false} reloadCurrent={false} view="#main-view" panelClose>
               <i className="va ml-5 fa fa-circle-o-notch"></i>
               <span>{dict.notifications}</span>

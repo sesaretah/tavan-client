@@ -3,7 +3,6 @@ import axios, {put} from 'axios';
 import { conf } from '../conf';
 
 const server= conf.server;
-console.log(server)
 //const server='http://localhost:3001/v1';
 //const server='/v1';
 //const server='http://95.156.255.115/api';
@@ -58,6 +57,32 @@ export function fileUpload(model, id , file, token){
     console.log(error);
   });
 }
+
+export function generalFilePost(model, formDataParams, token){
+  const url = server + '/'+ model;
+  const formData = new FormData();
+  formDataParams.map((formDataParam) =>
+  formData.append(formDataParam.label, formDataParam.value)
+  )
+  //formData.append(data.file_label,file)
+  //formData.append('profile[id]',id)
+  const config = {
+      headers: {
+          'content-type': 'multipart/form-data',
+          'Authorization': "bearer " + token 
+      }
+  }
+  axios.post(url, formData,config).then(function (response) {
+    dispatcher.dispatch({
+      type: "GENERAL_POST_FILE_SUCCESS",
+      instance: response.data,
+    });
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
 
 export function getInstance(model, id, token) {
   axios.get(server + '/'+ model +'/'+id, { headers: {'Content-Type': 'application/json', 'Authorization': "bearer " + token } })

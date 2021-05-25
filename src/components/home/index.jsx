@@ -24,6 +24,9 @@ export default class HomePage extends Component {
       notifications: null,
       reports: null,
       events: null,
+      statusChanges: null,
+      taskPage: 1,
+      taskPp: 10,
     }
   }
 
@@ -36,12 +39,8 @@ export default class HomePage extends Component {
     ModelStore.removeListener("got_multiple_list", this.getMutipleList);
   }
 
-  componentDidMount() {
-    if (this.state.token && this.state.token.length > 10) {
-
-    }
-  }
   loadCalender() {
+   // this.$$('.page-content').scrollTop(this.$$('#status-card')[0].offsetTop)
     const self = this;
     const app = self.$f7;
     var events = []
@@ -95,17 +94,19 @@ export default class HomePage extends Component {
 
 
   pageAfterIn() {
-    //this.loadCalender();
+   
   }
 
   componentDidMount() {
     this.loadData();
+   
   }
 
   loadData() {
     const f7: Framework7 = Framework7.instance;
     f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top' });
-    MyActions.getMultipleList('home', this.state.page, {}, this.state.token);
+    var data = {task_page: this.state.taskPage, task_pp: this.state.taskPp}
+    MyActions.getMultipleList('home', this.state.page, data, this.state.token);
   }
 
   getMutipleList() {
@@ -119,9 +120,11 @@ export default class HomePage extends Component {
         notifications: multiple.notifications,
         reports: multiple.reports,
         tasksVisits: multiple.tasks_visits,
-        events: multiple.events
+        events: multiple.events,
+        statusChanges: multiple.status_change,
       }, () => this.loadCalender());
     }
+    
   }
 
   sortChange(i) {
@@ -129,11 +132,11 @@ export default class HomePage extends Component {
   }
 
   render() {
-    const { tasks, works, notifications, reports, tasksVisits } = this.state;
+    const { tasks, works, notifications, reports, tasksVisits,statusChanges } = this.state;
     return (<HomeContent 
       notifications={notifications} tasksVisits={tasksVisits}
        reports={reports} tasks={tasks} works={works} sortChange={this.sortChange} 
-       pageAfterIn={this.pageAfterIn}
+       pageAfterIn={this.pageAfterIn} statusChanges={statusChanges}
        />)
   }
 }

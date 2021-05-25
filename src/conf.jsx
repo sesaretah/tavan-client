@@ -1,3 +1,4 @@
 export const conf = { 
-'server' : '/v1'
+//'server' : 'http://localhost:3001/v1',
+'server' : '/v1',
 };

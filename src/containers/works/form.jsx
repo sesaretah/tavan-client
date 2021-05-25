@@ -35,15 +35,7 @@ const WorkForm = (props) => {
           }}
         />
 
-        <ListInput
-          label={dict.details}
-          type="textarea"
-          placeholder={dict.write_appropriate_description}
-          value={props.content}
-          onInput={(e) => {
-            props.handleChange({ details: e.target.value })
-          }}
-        />
+ 
 
         <ListInput
           label={dict.priority}

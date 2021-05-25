@@ -9,13 +9,20 @@ defaults.global.defaultFontFamily = 'iransans';
 const TimeSeries = (props) => {
     function series() {
         var result = []
+        var dynamicColors = function() {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            return "rgb(" + r + "," + g + "," + b + ")";
+         };
+
         var colors = ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#20f08b', '#944dab', '#67f71d', '#650512', '#2f5561', '#e4ae5c']
         props.tasksVisits.map((v) => {
             var d = []
-            Object.keys(v.series.data).map(function (key, index) { d.push({ x: new window.ODate(key), y: index }) })
+            Object.keys(v.series.data).map(function (key, index) { d.push({ x: new window.ODate(key).toLocaleDateString("fa-IR"), y: index }) })
             result.push({
-                label: v.series.title,
-                backgroundColor: colors[Math.floor(Math.random() * 10)],
+                label: v.series.title.substring(0,15),
+                backgroundColor: dynamicColors(),
                 borderColor: 'blue',
                 data: d
             })
@@ -45,10 +52,12 @@ const TimeSeries = (props) => {
         return (
             <Card>
                 <CardHeader></CardHeader>
-                <CardContent className='h-200'>
+                <CardContent className='h-300'>
                     <Bar
                         data={{ datasets: series() }}
                         options={{
+                            maintainAspectRatio: false,
+                            responsive: true,
                             scales: {
                                 xAxes: [{
                                     type: 'time',

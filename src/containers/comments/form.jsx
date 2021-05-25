@@ -1,17 +1,25 @@
 import React from "react";
-import { List, ListInput, BlockTitle, Block, Link, Button, Card, CardHeader, CardFooter } from 'framework7-react';
+import { List, ListInput, Chip, Block, Link, Button, Card, CardHeader, CardFooter } from 'framework7-react';
 import { dict } from '../../Dict';
 import InputTrigger from 'react-input-trigger';
 
 
 const CommentForm = (props) => {
+  function replyTo(){
+    if(props.replyTo){
+      var content = ''
+      props.comments.map((cm) => { if(cm.id === props.replyTo){content = cm.content}})
+      return(<Chip text={dict.in_reply_to + ': '+ content.substring(0,20)} deleteable onClick={ props.removeReply } />)
+    }
+    
+  }
   return (
     <Card>
-      <CardHeader>{dict.comment_form}</CardHeader>
+      <CardHeader>{dict.comment_form} {replyTo()}</CardHeader>
      <List >
         <ListInput
           label={dict.comment}
-          id="cm-form"
+          inputId={"cm-form-"+props.rnd}
           type="textarea"
           placeholder='...'
           maxlength='300'

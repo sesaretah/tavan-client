@@ -5,7 +5,7 @@ import WorkList from "../tasks/workList"
 import NotificationList from "../notifications/homeList"
 import ReportList from "../reports/homeList"
 import VisitChart from "../visits/timeseries"
-
+import StatusChanges from "../statuses/changes"
 
 import { dict } from '../../Dict';
 
@@ -26,10 +26,15 @@ const HomeIndex = (props) => {
                 </Col>
 
                 <Col width='100' tabletWidth='50'>
-                    <VisitChart tasksVisits={props.tasksVisits} header={dict.your_newest_works} sortChange={props.sortChange} />
+                    <Card>
+                        <CardHeader>{dict.events_calendar}</CardHeader>
+                        <CardContent className='home'>
+                            <div className="block block-strong no-padding">
+                                <div id="demo-calendar-inline-container"></div>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </Col>
-
-
 
             </Row>
             <Row>
@@ -39,29 +44,22 @@ const HomeIndex = (props) => {
                     </Card>
                 </Col>
                 <Col width='100' tabletWidth='50'>
-                    <Card>
-                        <CardHeader>{dict.events_calendar}</CardHeader>
-                        <CardContent className='home'>
-                        <div className="block block-strong no-padding">
-                            <div id="demo-calendar-inline-container"></div>
-                        </div>
-                        </CardContent>
-                    </Card>
-                </Col>
-            </Row>
-            <Row>
-                <Col width='100' tabletWidth='50'>
                     <NotificationList notifications={props.notifications} header={dict.your_newest_works} sortChange={props.sortChange} />
                 </Col>
 
+            </Row>
+            <Row>
                 <Col width='100' tabletWidth='50'>
                     <ReportList reports={props.reports} header={dict.your_newest_works} sortChange={props.sortChange} />
                 </Col>
+                <Col id='status-card' width='100' tabletWidth='50'>
+                    <StatusChanges statusChanges={props.statusChanges} header={dict.your_newest_works} sortChange={props.sortChange} />
+                </Col>
             </Row>
-
             <Row>
-
-
+                <Col width='100' tabletWidth='100'>
+                    <VisitChart tasksVisits={props.tasksVisits} header={dict.your_newest_works} sortChange={props.sortChange} />
+                </Col>
             </Row>
 
         </Page>

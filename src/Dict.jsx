@@ -250,5 +250,11 @@ export const dict = {
   'add_comments_to_reports':'افزودن نظر به گزارشات',
   'new_notifications' : 'آگاهسازی های جدید',
   'new_reports': 'آخرین گزارشات',
-  'events_calendar': 'تقویم رخدادها'
+  'events_calendar': 'تقویم رخدادها',
+  'to': 'به',
+  'statusChanges': 'تغییرات وضعیت ها',
+  'in_reply_to': 'در پاسخ به',
+  'surveillance': 'نظارت',
+  'start': 'شروع',
+  'stop': 'پایان'
 }

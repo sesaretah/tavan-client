@@ -83,7 +83,7 @@ const Works = (props) => {
                 </CardHeader>
                 <CardContent>
                     <List mediaList >
-                        {props.task.works.map((work) =>
+                        {props.works.map((work) =>
                             <ListItem
                                 key={'work'+work.id}
                                 className='fs-11 work-media'
@@ -103,6 +103,7 @@ const Works = (props) => {
                         disableButtonText={dict.cancel}
                         placeholder={dict.search}
                         inline={true}
+                        onChange={(e) => props.searchWork(e.target.value)}
                     ></Searchbar>
 
                 </CardFooter>

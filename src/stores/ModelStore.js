@@ -105,6 +105,11 @@ class ModelStore extends EventEmitter {
         break;
       }
 
+      case "GENERAL_POST_FILE_SUCCESS": {
+        this.postFile(action.instance);
+        break;
+      }
+
       
     }
   }

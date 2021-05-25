@@ -82,7 +82,7 @@ const TaskShow = (props) => {
         if (props.access.includes('works')) {
           editable = true
         }
-        return (<Works task={props.task} editable={editable} ></Works>)
+        return (<Works task={props.task} works={props.works} editable={editable} searchWork={props.searchWork}></Works>)
       }
 
       if (segment === 'reports') {
@@ -90,7 +90,7 @@ const TaskShow = (props) => {
         if (props.access.includes('reports')) {
           editable = true
         }
-        return (<Reports task={props.task} editable={editable} ></Reports>)
+        return (<Reports task={props.task} reports={props.reports} editable={editable} searchReport={props.searchReport}></Reports>)
       }
 
       if (segment === 'comments') {
@@ -98,9 +98,9 @@ const TaskShow = (props) => {
           return (
             <CommentForm
               model={props.task} submit={props.submitComment}
-              handleChange={props.handleChange} 
-        
-             
+              handleChange={props.handleChange} replyTo={props.replyTo}
+              comments={props.comments} removeReply={props.removeReply}
+              rnd={props.rnd}
             />
           )
         }
@@ -161,7 +161,7 @@ const TaskShow = (props) => {
               {access('comments')}
               <CommentList
                 comments={props.comments} deleteCommentConfirm={props.deleteCommentConfirm}
-                loadMore={props.loadMore} />
+                loadMore={props.loadMore} replyToComment={props.replyToComment}  />
 
 
             </React.Fragment>

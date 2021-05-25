@@ -9,7 +9,7 @@ import { dict } from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
 import TaskShow from "../../containers/tasks/show"
-import { messaging } from "../../init-fcm.js";
+import crypto from 'crypto-js';
 
 export default class Layout extends Component {
   constructor() {
@@ -30,8 +30,12 @@ export default class Layout extends Component {
     this.changeRole = this.changeRole.bind(this);
     this.deleteCommentConfirm = this.deleteCommentConfirm.bind(this);
     this.addGroup = this.addGroup.bind(this);
+    this.replyToComment = this.replyToComment.bind(this);
+    this.removeReply = this.removeReply.bind(this);
+    this.searchReport = this.searchReport.bind(this);
+    this.searchWork = this.searchWork.bind(this);
     
-
+    
 
     this.state = {
       token: window.localStorage.getItem('token'),
@@ -50,7 +54,10 @@ export default class Layout extends Component {
       statuses: [],
       access: [],
       commentContent: '',
-
+      replyTo: null,
+      reportQuery: null,
+      reports: null,
+      rnd: crypto.lib.WordArray.random(32),
     }
   }
 
@@ -81,11 +88,14 @@ export default class Layout extends Component {
         id: task.id,
         assignedUsers: task.users,
         works: task.works,
+        reports: task.reports,
         comments: task.the_comments,
-        access: task.user_access
+        access: task.user_access,
+        replyTo: null,
+        reportQuery: null,
       });
     }
-    this.$$('.btn').show();
+    this.$$('#cm-form-'+this.state.rnd).val('');
   }
 
 
@@ -111,6 +121,16 @@ export default class Layout extends Component {
     if (list && klass === 'Status') {
       this.setState({
         statuses: list,
+      });
+    }
+    if (list && klass === 'Report') {
+      this.setState({
+        reports: list,
+      });
+    }
+    if (list && klass === 'Work') {
+      this.setState({
+        works: list,
       });
     }
   }
@@ -157,7 +177,7 @@ export default class Layout extends Component {
   }
 
   submitComment() {
-    var data = { commentable_type: 'Task', commentable_id: this.state.id, content: this.state.commentContent }
+    var data = { commentable_type: 'Task', commentable_id: this.state.id, content: this.state.commentContent, reply_id: this.state.replyTo }
     MyActions.setInstance('comments', data, this.state.token);
   }
 
@@ -171,6 +191,14 @@ export default class Layout extends Component {
   deleteComment(id) {
     var data = { id: id }
     MyActions.removeInstance('comments', data, this.state.token, this.state.page);
+  }
+
+  searchReport(q){
+    MyActions.getList('reports/search', this.state.page, { task_id: this.state.id, q: q }, this.state.token);
+  }
+
+  searchWork(q){
+    MyActions.getList('works/search', this.state.page, { task_id: this.state.id, q: q }, this.state.token);
   }
 
 
@@ -204,13 +232,22 @@ export default class Layout extends Component {
     }
   }
 
+  replyToComment(id) {
+    this.setState({ replyTo: id })
+    this.$$('#cm-form-'+this.state.rnd).focus()
+  }
+
+  removeReply() {
+    this.setState({ replyTo: null })
+  }
+
 
 
   render() {
     const {
       task, users, assignedUsers, ability,
       profiles, statuses, works, commentContent,
-      comments, access, } = this.state;
+      comments, access, replyTo, rnd, reports } = this.state;
     return (
       <Page>
         <Navbar title={dict.tasks} backLink={dict.back} backLinkForce={true}>
@@ -228,6 +265,8 @@ export default class Layout extends Component {
           submitComment={this.submitComment} deleteCommentConfirm={this.deleteCommentConfirm}
           commentContent={commentContent} comments={comments} loadMore={this.loadMore}
           changeRole={this.changeRole} access={access} addGroup={this.addGroup}
+          replyToComment={this.replyToComment} replyTo={replyTo} removeReply={this.removeReply}
+          rnd={rnd} searchReport={this.searchReport} reports={reports} searchWork={this.searchWork}
         />
       </Page>
     );

@@ -26,7 +26,7 @@ const Reports = (props) => {
                 </CardHeader>
                 <CardContent>
                     <List mediaList >
-                        {props.task.reports.map((report) =>
+                        {props.reports.map((report) =>
                             <ListItem
                                 key={'report' + report.id}
                                 className='fs-11 work-media'
@@ -45,6 +45,7 @@ const Reports = (props) => {
                         disableButtonText={dict.cancel}
                         placeholder={dict.search}
                         inline={true}
+                        onChange={(e) => props.searchReport(e.target.value)}
                     ></Searchbar>
                 </CardFooter>
             </Card>

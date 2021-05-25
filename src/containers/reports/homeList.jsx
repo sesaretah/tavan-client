@@ -19,7 +19,7 @@ console.log(props)
               <ListItem
                 className={'fs-11 '}
                 key={crypto.lib.WordArray.random(32)}
-                link={'/' + report.target_type + '/' + report.target_id}
+                link={'/reports/' + report.id}
                 text={profileLink(report.profile)}
                 title={report.title}
               >

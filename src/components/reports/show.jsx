@@ -10,7 +10,7 @@ import { dict } from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
 import ReportShow from "../../containers/reports/show";
-
+import crypto from 'crypto-js';
 
 export default class Layout extends Component {
   constructor() {
@@ -22,8 +22,9 @@ export default class Layout extends Component {
     this.submitComment = this.submitComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
     this.deleteCommentConfirm = this.deleteCommentConfirm.bind(this);
-    
     this.loadMore = this.loadMore.bind(this);
+    this.replyToComment = this.replyToComment.bind(this);
+    this.removeReply = this.removeReply.bind(this);
 
 
 
@@ -37,7 +38,9 @@ export default class Layout extends Component {
       commentContent: '',
       comments: null,
       access: null,
+      replyTo: null,
       token: window.localStorage.getItem('token'),
+      rnd: crypto.lib.WordArray.random(32),
 
     }
   }
@@ -70,9 +73,9 @@ export default class Layout extends Component {
         id: report.id,
         comments: report.the_comments,
         access: report.user_access,
+        replyTo: null,
       });
     }
-    console.log(report)
   }
 
   getList() {
@@ -89,6 +92,7 @@ export default class Layout extends Component {
         page: 1
       });
     }
+    this.$$('#cm-form-'+this.state.rnd).val('');
   }
 
   loadMore() {
@@ -115,7 +119,7 @@ export default class Layout extends Component {
 
 
   submitComment() {
-    var data = { commentable_type: 'Report', commentable_id: this.state.id, content: this.state.commentContent }
+    var data = { commentable_type: 'Report', commentable_id: this.state.id, content: this.state.commentContent , reply_id: this.state.replyTo }
     MyActions.setInstance('comments', data, this.state.token);
   }
 
@@ -131,8 +135,19 @@ export default class Layout extends Component {
     MyActions.removeInstance('comments', data, this.state.token, this.state.page);
   }
 
+  replyToComment(id) {
+    this.setState({ replyTo: id })
+    this.$$('#cm-form').focus()
+  }
+
+  removeReply() {
+    this.setState({ replyTo: null })
+  }
+
+
+
   render() {
-    const { report, comments , access} = this.state;
+    const { report, comments , access, replyTo, rnd} = this.state;
     return (
       <Page>
         <Navbar title={dict.reports} >
@@ -147,6 +162,8 @@ export default class Layout extends Component {
           deleteCommentConfirm={this.deleteCommentConfirm} submit={this.submit} 
           handleChange={this.handleChangeValue} loadMore={this.loadMore} 
           access={access}
+          replyToComment={this.replyToComment} replyTo={replyTo} removeReply={this.removeReply}
+          rnd={rnd}
           />
       </Page>
     );

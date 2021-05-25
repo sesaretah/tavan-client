@@ -11,14 +11,15 @@ import 'moment-timezone';
 import 'moment/locale/fa';
 
 const ReportShow = (props) => {
-
+console.log(props)
   function commentable(){
     if (props.access.includes('view_reports')) {
       return (
         <CommentForm
           model={props.task} submit={props.submitComment}
-          handleChange={props.handleChange} 
-    
+          handleChange={props.handleChange} replyTo={props.replyTo}
+          comments={props.comments} removeReply={props.removeReply}
+          rnd={props.rnd}
          
         />
       )
@@ -29,7 +30,7 @@ const ReportShow = (props) => {
     if (props.comments) {
      return( <CommentList
       comments={props.comments} deleteCommentConfirm={props.deleteCommentConfirm}
-      loadMore={props.loadMore} />)
+      loadMore={props.loadMore}  replyToComment={props.replyToComment} />)
     }
   }
   if (props.report && props.report.draft) {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Block, Card, CardHeader, Link, CardContent, List, ListItem, CardFooter, ListInput, Col } from 'framework7-react';
+import { Block, Card, CardHeader, Link, CardContent, List, ListItem, CardFooter, Searchbar, Col } from 'framework7-react';
 import crypto from 'crypto-js';
 import { dict } from "../../Dict";
 import Moment from 'react-moment';
@@ -26,7 +26,7 @@ const Reports = (props) => {
                 </CardHeader>
                 <CardContent>
                     <List mediaList >
-                        {props.work.reports.map((report) =>
+                        {props.reports.map((report) =>
                             <ListItem
                                 key={'report' + report.id}
                                 className='fs-11 work-media'
@@ -34,14 +34,21 @@ const Reports = (props) => {
                                 title={report.title}
                                 after={creation(report.creation_date)}
                                 text={report.content}
+                                
                             >
                             </ListItem>
                         )}
                     </List>
                 </CardContent>
                 <CardFooter>
-                    +
-              </CardFooter>
+                    <Searchbar
+                        className='p-static fs-10'
+                        disableButtonText={dict.cancel}
+                        placeholder={dict.search}
+                        inline={true}
+                        onChange={(e) => props.searchReport(e.target.value)}
+                    ></Searchbar>
+                </CardFooter>
             </Card>
         )
     } else {

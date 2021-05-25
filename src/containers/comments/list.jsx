@@ -8,13 +8,28 @@ import 'moment/locale/fa';
 const CommentList = (props) => {
     var items = []
     function editLink(comment) {
+        var result = []
         if (comment.editable) {
-            return (
+            result.push(
                 <Link onClick={() => props.deleteCommentConfirm(comment.id)}>
                     <i className="va ml-5 fa fa-trash"></i>
                 </Link>
             )
         }
+        result.push(
+            <Link onClick={() => props.replyToComment(comment.id)}>
+                <i className="va ml-5 fa fa-reply"></i>
+            </Link>
+        )
+        return (result)
+    }
+
+    function title(comment){
+        var result = [<span>{comment.profile.fullname}: </span>]
+        if(comment.reply_to){
+            result.push(<span className='fs-10 f-color-gray'>{dict.in_reply_to} {comment.reply_to}</span>)
+        }
+        return(result)
     }
     if (props.comments) {
 
@@ -30,8 +45,9 @@ const CommentList = (props) => {
                 <ListItem
                     key={'comment' + props.comments[i].id}
                     className='fs-10'
+                    id={'cm-'+props.comments[i].id}
                     text={time}
-                    title={props.comments[i].profile.fullname + ':'}
+                    title={title(props.comments[i])}
                     subtitle={props.comments[i].content}
                 >
                     <img slot="media" src={props.comments[i].profile.avatar} width="44" height="44" />

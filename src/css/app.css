@@ -5,7 +5,10 @@
     url(../fonts/IRANSansWeb.woff) format("woff"),
     url(../fonts/IRANSansWeb.ttf) format("truetype");
 }
-
+body {
+  /* All your regular code including overflow-x: hidden; */
+  position:relative;
+}
 .aurora body {
   font-family: iransans;
 }
@@ -662,6 +665,10 @@ margin-left: 2px !important;
   color: black !important;
 }
 
+.f-color-gray {
+  color: rgb(134, 133, 133) !important;
+}
+
 .bg-teal {
   background-color: rgb(97, 177, 214) !important;
 }
@@ -697,16 +704,41 @@ margin-left: 2px !important;
 .mh-90 {
   max-height: 90px !important;
   overflow: scroll;
+  -ms-overflow-style: none;
 }
 
 .h-120 {
   height: 120px !important;
   overflow: scroll;
+  -ms-overflow-style: none;
 }
 
 .h-200 {
   height: 200px !important;
   overflow: scroll;
+  -ms-overflow-style: none;
+}
+
+.h-300 {
+  height: 300px !important;
+  overflow: scroll;
+  -ms-overflow-style: none;
+}
+
+.mh-90::-webkit-scrollbar {
+  display: none;
+}
+
+.h-120::-webkit-scrollbar {
+  display: none;
+}
+
+.h-200::-webkit-scrollbar {
+  display: none;
+}
+
+.h-300::-webkit-scrollbar {
+  display: none;
 }
 
 
@@ -716,4 +748,8 @@ margin-left: 2px !important;
 
 .home .calendar-day .calendar-day-events { 
   margin-top: -2px;
+}
+
+.home-status  .item-inner .item-text { 
+  margin-top: -8px !important;
 }
